@@ -1,25 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react'
+import { Route } from 'react-router-dom'
+
+import { Header } from './components'
+import Home from './pages/Home'
+import Cart from './pages/Cart'
+
+import './scss/app.scss'
+
+
 
 function App() {
+  const [pizzas, setPizzas] = useState([])
+
+  useEffect(() => {
+    fetch('http://localhost:3000/db.json')
+      .then(response => response.json())
+      .then(data => setPizzas(data.pizzas))
+  }, [])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="wrapper">
+      <Header />
+      <div className="content">
+        <Route path={'/'} exact render={() => <Home items={pizzas} />} />
+        <Route path={'/cart'} exact component={Cart} />
+      </div>
     </div>
-  );
+  )
 }
 
 export default App;
