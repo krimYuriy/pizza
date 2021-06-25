@@ -5,7 +5,7 @@ function SortPopup({ categories }) {
    const [activePopup, setActivePopup] = useState(false)
    const [activeEl, setActiveEl] = useState(0)
    const sortRef = useRef()
-   const label = categories[activeEl]
+   const label = categories[activeEl].name
 
    useEffect(() => {
       document.body.addEventListener('click', handleClick)
@@ -56,9 +56,9 @@ function SortPopup({ categories }) {
                         <li
                            className={activeEl === index ? 'active' : ''}
                            onClick={() => selectActiveEl(index)}
-                           key={`${item} ${index}`}
+                           key={item.type}
                         >
-                           {item}
+                           {item.name}
                         </li>
                      )
                   })}
@@ -73,4 +73,4 @@ SortPopup.propTypes = {
    categories: PropTypes.array
 }
 
-export default SortPopup
+export default React.memo(SortPopup)
