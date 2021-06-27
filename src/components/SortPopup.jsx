@@ -1,18 +1,17 @@
 import React, { useState, useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
 
-function SortPopup({ categories }) {
+function SortPopup({ categories, activeSort, onSetSortBy }) {
    const [activePopup, setActivePopup] = useState(false)
-   const [activeEl, setActiveEl] = useState(0)
    const sortRef = useRef()
-   const label = categories[activeEl].name
+   const label = categories.find(item => item.type === activeSort)
 
    useEffect(() => {
       document.body.addEventListener('click', handleClick)
    }, [])
 
-   const selectActiveEl = index => {
-      setActiveEl(index)
+   const selectActiveEl = item => {
+      onSetSortBy(item)
       setActivePopup(false)
    }
 
@@ -46,16 +45,16 @@ function SortPopup({ categories }) {
                />
             </svg>
             <b>Сортировка по:</b>
-            <span onClick={togglePopup}>{label}</span>
+            <span onClick={togglePopup}>{label.name}</span>
          </div>
          { activePopup && (
             <div className="sort__popup">
                <ul>
-                  {categories.map((item, index) => {
+                  {categories.map((item) => {
                      return (
                         <li
-                           className={activeEl === index ? 'active' : ''}
-                           onClick={() => selectActiveEl(index)}
+                           className={activeSort === item.type ? 'active' : ''}
+                           onClick={() => selectActiveEl(item)}
                            key={item.type}
                         >
                            {item.name}

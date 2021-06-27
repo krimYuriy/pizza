@@ -1,4 +1,4 @@
-import { LOAD_PIZZAS } from "../types"
+import { LOAD_PIZZAS, SET_LOADING } from "../types"
 
 const initialState = {
    items: [],
@@ -6,14 +6,24 @@ const initialState = {
 }
 
 const pizzasReducer = (state = initialState, action) => {
-   if (action.type === LOAD_PIZZAS) {
-      return {
-         ...state,
-         items: action.payload,
-         isLoaded: true
-      }
+   switch (action.type) {
+      case LOAD_PIZZAS:
+         return {
+            ...state,
+            items: action.payload,
+            isLoaded: true
+         }
+      case SET_LOADING:
+         return {
+            ...state,
+            isLoaded: false
+         }
+      default:
+         return state
    }
-   return state
+
+
+
 }
 
 export default pizzasReducer
