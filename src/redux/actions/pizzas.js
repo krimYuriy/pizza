@@ -11,7 +11,7 @@ export const fetchPizzas = (category, sort) => (dispatch) => {
    dispatch({
       type: SET_LOADING
    })
-   fetch(`http://localhost:3001/pizzas?${category !== null
+   fetch(`/pizzas?${category !== null
       ? `category=${category}`
       : ''}&_sort=${sort.type}&_order=${sort.order}
       `
