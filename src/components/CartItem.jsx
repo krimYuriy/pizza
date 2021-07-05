@@ -1,5 +1,6 @@
 import React from 'react'
 import Button from './Button'
+import PropTypes from 'prop-types'
 
 function CartItem({ id, pizzaCount, pizzaSum, type, size, image, name, removePizza, increasePizza, decreasePizza }) {
 
@@ -65,6 +66,19 @@ function CartItem({ id, pizzaCount, pizzaSum, type, size, image, name, removePiz
          </div>
       </div>
    )
+}
+
+CartItem.propTypes = {
+   id: PropTypes.number,
+   pizzaCount: PropTypes.number.isRequired,
+   pizzaSum: PropTypes.number.isRequired,
+   type: PropTypes.string,
+   size: PropTypes.number,
+   image: PropTypes.string,
+   name: PropTypes.string,
+   removePizza: PropTypes.func.isRequired,
+   increasePizza: PropTypes.func.isRequired,
+   decreasePizza: PropTypes.func.isRequired
 }
 
 export default CartItem
