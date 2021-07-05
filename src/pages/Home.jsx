@@ -51,7 +51,7 @@ function Home() {
             <Categories names={categoresList} onSelectCategories={selectCagories} activeCategory={category} />
             <SortPopup categories={sortList} activeSort={sortBy.type} onSetSortBy={selectSort} />
          </div>
-         <h2 className="content__title">Все пиццы</h2>
+         <h2 className="content__title">{category === null ? 'Все пиццы' : categoresList[category]}</h2>
          <div className="content__items">
             {
                isLoaded

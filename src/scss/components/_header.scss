@@ -28,5 +28,10 @@
     p {
       color: #7b7b7b;
     }
+    @media(max-width: 650px) {
+      h1, p {
+        display: none;
+      }
+    }
   }
 }
